@@ -10,7 +10,6 @@ var path = require('path');
 var fs = require('fs');
 var os = require('os');
 var mimedb = require('./db.json');
-var download = require('download-file')
 
 module.exports = {
   generate: function(input_original, output, options, callback) {
