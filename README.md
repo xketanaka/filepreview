@@ -75,13 +75,15 @@ You can set options object for the preview generation. List of options available
 * width
 * height
 * quality [see quality documentation](https://www.imagemagick.org/script/command-line-options.php#quality)
+* autoOrient [see auto-orient documentation](https://www.imagemagick.org/script/command-line-options.php#auto-orient)
 
 e.g.
 ```javascript
 var options = {
   width: 640,
   height: 480,
-  quality: 90
+  quality: 90,
+  autoOrient: true,
 };
 
 // Asynchronous
