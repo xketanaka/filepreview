@@ -105,6 +105,9 @@ module.exports = {
             convertArgs.splice(0, 0, '-background', options.background);
             convertArgs.splice(0, 0, '-flatten');
           }
+          if (options.autoOrient) {
+            convertArgs.splice(0, 0, '-auto-orient');
+          }
           child_process.execFile('convert', convertArgs, function(error) {
             if (input_original.indexOf("http://") == 0 || input_original.indexOf("https://") == 0) {
               fs.unlinkSync(input);
@@ -239,6 +242,9 @@ module.exports = {
         if (options.background) {
           convertArgs.splice(0, 0, '-background', options.background);
           convertArgs.splice(0, 0, '-flatten');
+        }
+        if (options.autoOrient) {
+          convertArgs.splice(0, 0, '-auto-orient');
         }
         child_process.execFileSync('convert', convertArgs);
         if (input_original.indexOf("http://") == 0 || input_original.indexOf("https://") == 0) {
