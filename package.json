@@ -1,14 +1,14 @@
 {
-  "name": "filepreview",
-  "version": "1.0.14",
-  "description": "A file preview generator for node.js",
+  "name": "filepreview-es6",
+  "version": "1.0.0",
+  "description": "A file preview generator for node.js a fork from maxlabale original fileprivew",
   "main": "filepreview.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha  test/filepreview"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxlabelle/filepreview.git"
+    "url": "git+https://github.com/sahilsharmafrank/filepreview.git"
   },
   "keywords": [
     "video",
@@ -20,14 +20,15 @@
     "visual",
     "document"
   ],
-  "author": "Maxime Labelle <Maxime.Labelle@owasp.org> (https://github.com/maxlabelle/filepreview)",
+  "author": "Sahil Sharma (https://github.com/sahilsharmafrank/filepreview)",
   "license": "BSD-4-Clause",
   "bugs": {
-    "url": "https://github.com/maxlabelle/filepreview/issues"
+    "url": "https://github.com/sahilsharmafrank/filepreview/issues"
   },
-  "homepage": "https://github.com/maxlabelle/filepreview#readme",
-  "dependencies": {
-    "download-file": "^0.1.5",
-    "synchronize": "^2.0.0"
+  "homepage": "https://github.com/sahilsharmafrank/filepreview#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0"
   }
 }

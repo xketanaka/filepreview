@@ -1,6 +1,6 @@
 # About
 
-filepreview : A file preview generator for node.js
+filepreview : A fork of filepreview generator for node.js with added and customized functionality
 
 Will generate a file preview (gif, jpg or png) of about 450 different document formats.
 
@@ -56,39 +56,27 @@ Asynchronous with callback (if error, will return error in the callback) :
 
 ```
 
-Synchronous (if error, will return false):
-
-```javascript
-  var filepreview = require('filepreview');
-
-  if (!filepreview.generateSync('/home/myfile.docx', '/home/myfile_preview.gif')) {
-    console.log('Oops, something went wrong.');
-  } else {
-    console.log('File preview is /home/myfile_preview.gif');
-  };
-
-```
-
-You can specify a url instead of a file path, ie: http://www.myfile.com/my_file.doc, and filepreview will download it to generate its preview.
-
 You can set options object for the preview generation. List of options available:-
 * width
 * height
 * quality [see quality documentation](https://www.imagemagick.org/script/command-line-options.php#quality)
+* background
+* pdf
+* pdf_path
 
 e.g.
 ```javascript
 var options = {
   width: 640,
   height: 480,
-  quality: 90
+  quality: 90,
+  pdf: true,
+  pdf_path: path.resolve("test","pdfs")
 };
 
 // Asynchronous
 filepreview.generate('/home/myfile.docx', '/home/myfile_preview.gif', options, function(error) {...});
 
-// Synchronous
-filepreview.generateSync('/home/myfile.docx', '/home/myfile_preview.gif', options);
 ```
 
 To be more stable, you can run `unoconv` as [listener](https://github.com/dagwieers/unoconv#start-your-own-unoconv-listener) before running the file preview generation.
