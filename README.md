@@ -40,6 +40,14 @@ To install use npm:
   $ npm install filepreview
 ```
 
+##Test
+Basic test case for converting docx
+
+```
+  $ npm install chai mocha --save-dev
+  $ npm test
+``
+
 ## Usage
 
 Asynchronous with callback (if error, will return error in the callback) :

@@ -3,6 +3,7 @@
   filepreview : A file preview generator for node.js
   @todo: add synchronous function es6 compatible using async / await.
   @todo: make a standalone function for images with more custom options. 
+  @todo: make default options available
 
 */
 
@@ -82,6 +83,10 @@ module.exports = {
           }
           if (options.quality) {
             convertArgs.splice(0, 0, '-quality', options.quality);
+          }
+	  if (options.background) { 
+              convertArgs.splice(0, 0, '-background', options.background);
+              convertArgs.splice(0, 0, '-flatten');
           }
           child_process.execFile('convert', convertArgs, function(error) {
             if (input_original.indexOf("http://") == 0 || input_original.indexOf("https://") == 0) {
