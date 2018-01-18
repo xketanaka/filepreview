@@ -242,7 +242,6 @@ module.exports = {
         reject(e);
       }
     }
-
   })
   
 };

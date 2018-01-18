@@ -1,5 +1,7 @@
 node_modules
-test
+test/pdfs/*
+test/documents/*
+test/thumbnail/*
 package-lock.json
 .vscode
 

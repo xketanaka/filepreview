@@ -1,6 +1,10 @@
+https://img.shields.io/npm/dt/filepreview-es6.svg
+
 # About
 
-filepreview : A fork of filepreview generator for node.js with added and customized functionality
+filepreview : A fork of filepreview generator for node.js with added and customized functionality 
+
+background option for images and option to keep pdf as a standby
 
 Will generate a file preview (gif, jpg or png) of about 450 different document formats.
 
@@ -50,17 +54,23 @@ Basic test case for converting docx
 
 ## Usage
 
-Asynchronous with callback (if error, will return error in the callback) :
+Asynchronous with promises (if error, will return error in the catch block) :
 
 ```javascript
-  var filepreview = require('filepreview');
-
-  filepreview.generate('/home/myfile.docx', '/home/myfile_preview.gif', function(error) {
-    if (error) {
-      return console.log(error);
-    }
-    console.log('File preview is /home/myfile_preview.gif');
-  });
+  const fileName = "docs.docx";
+  const filePath = path.resolve("test","documents", fileName);
+  const options = {
+      width: 300,
+      height: 200,
+      quality: 100,
+      background: '#fff',
+      pdf: true,
+      pdf_path: path.resolve("test","pdfs")
+  }
+  const outPath = path.resolve ("test", "thumbnail", "test_files", `${fileName.replace(/\.[^/.]+$/, "")}.png`);
+  filepreview.generateAsync(filePath , outPath, options)
+  .then( () => done() )
+  .catch( error => done(error));
 
 ```
 
@@ -78,12 +88,13 @@ var options = {
   width: 640,
   height: 480,
   quality: 90,
+  background: '#fff',
   pdf: true,
   pdf_path: path.resolve("test","pdfs")
 };
 
 // Asynchronous
-filepreview.generate('/home/myfile.docx', '/home/myfile_preview.gif', options, function(error) {...});
+filepreview.generateAsync(filePath , outPath, options).then( () => done() ).catch( error => done(error));
 
 ```
 
