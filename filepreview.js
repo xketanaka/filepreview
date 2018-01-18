@@ -79,7 +79,15 @@ module.exports = {
         if (fileType == 'image') {
           let convertArgs = [input + '[0]', output];
           if (options.width > 0 && options.height > 0) {
-            convertArgs.splice(0, 0, '-resize', options.width + 'x' + options.height);
+            if(options.keepAspect) {
+              convertArgs.splice(0, 0, '-resize', options.width + 'x' + options.height );
+            } else {
+              convertArgs.splice(0, 0, '-resize', options.width + 'x' + options.height + '!');
+            }
+          } else if (options.height > 0) {
+            convertArgs.splice(0, 0, '-resize', 'x' + options.height);
+          } else if (options.width > 0) {
+            convertArgs.splice(0, 0, '-resize', options.width);
           }
           if (options.quality) {
             convertArgs.splice(0, 0, '-quality', options.quality);
@@ -102,7 +110,15 @@ module.exports = {
             if (error) reject(error);
             let convertOtherArgs = [tempPDF + '[0]', output];
             if (options.width > 0 && options.height > 0) {
-              convertOtherArgs.splice(0, 0, '-resize', options.width + 'x' + options.height);
+              if(options.keepAspect) {
+                convertOtherArgs.splice(0, 0, '-resize', options.width + 'x' + options.height );
+              } else {
+                convertOtherArgs.splice(0, 0, '-resize', options.width + 'x' + options.height + '!');
+              }
+            } else if (options.height > 0) {
+              convertOtherArgs.splice(0, 0, '-resize', 'x' + options.height);
+            } else if (options.width > 0) {
+              convertOtherArgs.splice(0, 0, '-resize', options.width);
             }
             if (options.quality) {
               convertOtherArgs.splice(0, 0, '-quality', options.quality);
@@ -199,7 +215,15 @@ module.exports = {
       try {
         let convertArgs = [input + '[0]', output];
         if (options.width > 0 && options.height > 0) {
-          convertArgs.splice(0, 0, '-resize', options.width + 'x' + options.height);
+          if(options.keepAspect) {
+            convertArgs.splice(0, 0, '-resize', options.width + 'x' + options.height);
+          } else {
+            convertArgs.splice(0, 0, '-resize', options.width + 'x' + options.height + '!');
+          }
+        } else if (options.height > 0) {
+          convertArgs.splice(0, 0, '-resize', 'x' + options.height);
+        } else if (options.width > 0) {
+          convertArgs.splice(0, 0, '-resize', options.width);
         }
         if (options.quality) {
           convertArgs.splice(0, 0, '-quality', options.quality);
@@ -217,9 +241,17 @@ module.exports = {
 
         child_process.execFileSync('unoconv', ['-e', 'PageRange=1', '-o', tempPDF, input]);
 
-        var convertOtherArgs = [tempPDF + '[0]', output];
+        let convertOtherArgs = [tempPDF + '[0]', output];
         if (options.width > 0 && options.height > 0) {
-          convertOtherArgs.splice(0, 0, '-resize', options.width + 'x' + options.height);
+          if(options.keepAspect) {
+            convertOtherArgs.splice(0, 0, '-resize', options.width + 'x' + options.height );
+          } else {
+            convertOtherArgs.splice(0, 0, '-resize', options.width + 'x' + options.height + '!');
+          }
+        } else if (options.height > 0) {
+          convertOtherArgs.splice(0, 0, '-resize', 'x' + options.height);
+        } else if (options.width > 0) {
+          convertOtherArgs.splice(0, 0, '-resize', options.width);
         }
         if (options.quality) {
           convertOtherArgs.splice(0, 0, '-quality', options.quality);
