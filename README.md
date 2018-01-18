@@ -67,6 +67,7 @@ Asynchronous with promises (if error, will return error in the catch block) :
       quality: 100,
       background: '#fff',
       pdf: true,
+      keepAspect: true,
       pdf_path: path.resolve("test","pdfs")
   }
   const outPath = path.resolve ("test", "thumbnail", "test_files", `${fileName.replace(/\.[^/.]+$/, "")}.png`);
@@ -92,6 +93,7 @@ var options = {
   quality: 90,
   background: '#fff',
   pdf: true,
+  keepAspect: false,
   pdf_path: path.resolve("test","pdfs")
 };
 
