@@ -1,4 +1,4 @@
-https://img.shields.io/npm/dt/filepreview-es6.svg
+![filepreview-es6](https://img.shields.io/npm/dt/filepreview-es6.svg)
 
 # About
 
@@ -9,6 +9,8 @@ background option for images and option to keep pdf as a standby
 Will generate a file preview (gif, jpg or png) of about 450 different document formats.
 
 See filepreview in action, watch this demo using Angular : https://vimeo.com/151667833
+
+Wait for more changes to come
 
 ## Installation
 

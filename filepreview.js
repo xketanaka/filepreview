@@ -4,6 +4,7 @@
   @todo: add synchronous function es6 compatible using async / await.
   @todo: make a standalone function for images with more custom options. 
   @todo: make default options available
+  @todo: add validation if file doesnot exist return reject
 
 */
 
