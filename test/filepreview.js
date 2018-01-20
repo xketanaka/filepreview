@@ -18,7 +18,7 @@ describe("Test to create a thumbnail from docx file with height and width with a
             keepAspect: true,
             pdf_path: path.resolve("test","pdfs")
         }
-        const outPath = path.resolve ("test", "thumbnail", `${fileName.replace(/\.[^/.]+$/, "")}-widthxheight.png`);
+        const outPath = path.resolve ("test", "thumbnail", `${fileName.replace(/\.[^/.]+$/, "")}-widthxheight.jpg`);
         filepreview.generateAsync(filePath , outPath, options)
         .then( () => done() )
         .catch( error => done(error));

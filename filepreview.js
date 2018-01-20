@@ -4,7 +4,7 @@
   @todo: add synchronous function es6 compatible using async / await.
   @todo: make a standalone function for images with more custom options. 
   @todo: make default options available
-  @todo: add validation if file doesnot exist return reject
+  @todo: 
 
 */
 
@@ -22,18 +22,15 @@ module.exports = {
   generateAsync: (input_original, output, options = {}) => new Promise((resolve, reject) => {
 
     let input = input_original;
+    if (!fs.existsSync(input)) reject({error: "file doesnot exist please make sure you are using the right path"});
 
     // Check for supported output format
     let extOutput = path.extname(output).toLowerCase().replace('.', '');
     let extInput = path.extname(input).toLowerCase().replace('.', '');
     let fileNameOrignal = path.basename(input, '.' + extInput);
 
-    if (
-      extOutput != 'gif' &&
-      extOutput != 'jpg' &&
-      extOutput != 'png'
-    ) {
-      resolve();
+    if ( extOutput != 'gif' && extOutput != 'jpg' && extOutput != 'png' ) {
+      reject({error: "extension not supported, use png, gif, jpg"});
     }
 
     let fileType = 'other';
@@ -150,18 +147,14 @@ module.exports = {
   generateSync: (input_original, output, options = {}) => new Promise((resolve, reject) => {
 
     let input = input_original;
-
+    if (!fs.existsSync(input)) reject({error: "file doesnot exist please make sure you are using the right path"});
     // Check for supported output format
     let extOutput = path.extname(output).toLowerCase().replace('.', '');
     let extInput = path.extname(input).toLowerCase().replace('.', '');
     let fileNameOrignal = path.basename(input, '.' + extInput);
-
-    if (
-      extOutput != 'gif' &&
-      extOutput != 'jpg' &&
-      extOutput != 'png'
-    ) {
-      resolve();
+console.log(extOutput);
+    if ( extOutput != 'gif' && extOutput != 'jpg' && extOutput != 'png' ) {
+      reject({error: "extension not supported, use png, gif, jpg"});
     }
 
     let fileType = 'other';
