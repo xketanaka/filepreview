@@ -117,3 +117,18 @@ describe("Test to create a thumbnail using sync method", () => {
     })
 });
 
+describe("Test to create a thumbnail using sync method", () => {
+    it("Should create a thumbnail synchronously from a psb adobe file", done => {
+        const fileName = "ffc.psb";
+        const filePath = path.resolve("test","documents", fileName);
+        const options = {
+            height: 300,
+            quality: 100
+        }
+        const outPath = path.resolve ("test", "thumbnail", `${fileName.replace(/\.[^/.]+$/, "")}-sync.png`);
+        filepreview.generateAsync(filePath , outPath, options)
+        .then( () => done() )
+        .catch( error => done(error));
+    })
+});
+

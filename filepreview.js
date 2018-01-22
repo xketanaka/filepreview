@@ -52,7 +52,7 @@ module.exports = {
           }
         }
       }
-
+      
     if (extInput == 'pdf') {
       fileType = 'image';
     }
@@ -152,7 +152,7 @@ module.exports = {
     let extOutput = path.extname(output).toLowerCase().replace('.', '');
     let extInput = path.extname(input).toLowerCase().replace('.', '');
     let fileNameOrignal = path.basename(input, '.' + extInput);
-console.log(extOutput);
+
     if ( extOutput != 'gif' && extOutput != 'jpg' && extOutput != 'png' ) {
       reject({error: "extension not supported, use png, gif, jpg"});
     }

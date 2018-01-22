@@ -1195,10 +1195,6 @@
     "source": "iana",
     "extensions": ["plb"]
   },
-  "application/vnd.3gpp.pic-bw-small": {
-    "source": "iana",
-    "extensions": ["psb"]
-  },
   "application/vnd.3gpp.pic-bw-var": {
     "source": "iana",
     "extensions": ["pvb"]
@@ -5381,6 +5377,10 @@
   "font/opentype": {
     "compressible": true,
     "extensions": ["otf"]
+  },
+  "image/vnd.3gpp.pic-bw-small": {
+    "source": "iana",
+    "extensions": ["psb"]
   },
   "image/bmp": {
     "source": "apache",
