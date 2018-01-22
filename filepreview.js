@@ -52,7 +52,7 @@ module.exports = {
           }
         }
       }
-      
+
     if (extInput == 'pdf') {
       fileType = 'image';
     }
@@ -60,7 +60,7 @@ module.exports = {
     fs.lstat(input, function (error, stats) {
       if (error) reject(error);
       if (!stats.isFile()) {
-        resolve();
+        reject({error: "Not a valid file."});
       } else {
         if (fileType == 'video') {
           let ffmpegArgs = ['-y', '-i', input, '-vf', 'thumbnail', '-frames:v', '1', output];
@@ -69,7 +69,7 @@ module.exports = {
           }
           child_process.execFile('ffmpeg', ffmpegArgs, function (error) {
             if (error) reject(error);
-            resolve();
+            resolve({thumbnail: output});
           });
         }
 
@@ -95,7 +95,7 @@ module.exports = {
           }
           child_process.execFile('convert', convertArgs, function (error) {
             if (error) reject(error);
-            resolve();
+            resolve({thumbnail: output});
           });
         }
 
@@ -129,10 +129,10 @@ module.exports = {
               if (!options.pdf || options.pdf == undefined) {
                 fs.unlink(tempPDF, function (error) {
                   if (error) reject(error);
-                  resolve();
+                  resolve({thumbnail: output});
                 });
               } else {
-                resolve();
+                resolve({thumbnail: output, pdf: tempPDF});
               }
             });
           });
@@ -198,7 +198,7 @@ module.exports = {
           ffmpegArgs.splice(4, 1, 'thumbnail,scale=' + options.width + ':' + options.height)
         }
         child_process.execFileSync('ffmpeg', ffmpegArgs);
-        resolve();
+        resolve({thumbnail: output});
       } catch (e) {
         reject(e);
       }
@@ -222,7 +222,7 @@ module.exports = {
           convertArgs.splice(0, 0, '-quality', options.quality);
         }
         child_process.execFileSync('convert', convertArgs);
-        resolve();
+        resolve({thumbnail: output});
       } catch (e) {
         reject(e);
       }
@@ -258,12 +258,12 @@ module.exports = {
         if (!options.pdf || options.pdf == undefined) {
           try {
             fs.unlinkSync(tempPDF);
-            resolve();
+            resolve({thumbnail: output});
           } catch (e) {
             reject(e);
           }
         }
-        resolve();
+        resolve({thumbnail: output, pdf: tempPDF});
       } catch (e) {
         reject(e);
       }

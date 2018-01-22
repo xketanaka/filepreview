@@ -20,7 +20,10 @@ describe("Test to create a thumbnail from docx file with height and width with a
         }
         const outPath = path.resolve ("test", "thumbnail", `${fileName.replace(/\.[^/.]+$/, "")}-widthxheight.jpg`);
         filepreview.generateAsync(filePath , outPath, options)
-        .then( () => done() )
+        .then( (response) => {
+            //console.log(response);
+            done();
+        })
         .catch( error => done(error));
     });
 });

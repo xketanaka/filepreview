@@ -1,6 +1,6 @@
 {
   "name": "filepreview-es6",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A file preview generator for node.js a fork from maxlabale original fileprivew",
   "main": "filepreview.js",
   "scripts": {

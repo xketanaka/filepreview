@@ -10,6 +10,8 @@ Will generate a file preview (gif, jpg or png) of about 450 different document f
 
 It provides you with an option to keep the height/width fixed or keep the resolution.
 
+The API now returns the image and pdf path in return of promise
+
 Wait for more changes to come
 
 ## Installation
@@ -56,25 +58,27 @@ Basic test case for converting docx
 
 ## Usage
 
-Asynchronous with promises (if error, will return error in the catch block) :
+Asynchronous with promises (if error, will return error in the catch block).
 
 ```javascript
-  const fileName = "docs.docx";
-  const filePath = path.resolve("test","documents", fileName);
-  const options = {
-      width: 300,
-      height: 200,
-      quality: 100,
-      background: '#fff',
-      pdf: true,
-      keepAspect: true,
-      pdf_path: path.resolve("test","pdfs")
-  }
-  const outPath = path.resolve ("test", "thumbnail", "test_files", `${fileName.replace(/\.[^/.]+$/, "")}.png`);
-  filepreview.generateAsync(filePath , outPath, options)
-  .then( () => done() )
-  .catch( error => done(error));
-
+const fileName = "docs.docx";
+const filePath = path.resolve("test","documents", fileName);
+const options = {
+    width: 300,
+    height: 200,
+    quality: 100,
+    background: '#fff',
+    pdf: true,
+    keepAspect: true,
+    pdf_path: path.resolve("test","pdfs")
+}
+const outPath = path.resolve ("test", "thumbnail", "test_files", `${fileName.replace(/\.[^/.]+$/, "")}.png`);
+filepreview.generateAsync(filePath , outPath, options)
+.then( (response) => {
+  console.log(response);
+  done();
+})
+.catch( error => done(error));
 ```
 
 You can set options object for the preview generation. List of options available:-
