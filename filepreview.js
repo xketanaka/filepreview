@@ -2,9 +2,9 @@
 
   filepreview : A file preview generator for node.js
   @todo: add synchronous function es6 compatible using async / await.
-  @todo: make a standalone function for images with more custom options. 
+  @todo: make a standalone function for images with more custom options.
   @todo: make default options available
-  @todo: 
+  @todo:
 
 */
 
@@ -17,7 +17,7 @@ module.exports = {
   /**
    * Used promise for creating thumbnail from documents file.
    * Creates a pdf from any document using command line tool unoconv.
-   * Creates a thumbnail from the pdf generated using imagemagic command line tool convert. 
+   * Creates a thumbnail from the pdf generated using imagemagic command line tool convert.
    */
   generateAsync: (input_original, output, options = {}) => new Promise((resolve, reject) => {
 
@@ -32,6 +32,10 @@ module.exports = {
     if ( extOutput != 'gif' && extOutput != 'jpg' && extOutput != 'png' ) {
       reject({error: "extension not supported, use png, gif, jpg"});
     }
+
+    let execFileOptions = ["cwd", "env", "timeout", "uid", "gid"].reduce((acc, val) => {
+      return (val in options) ? Object.assign(acc, { [val]: options[val] }) : acc;
+    }, {});
 
     let fileType = 'other';
 
@@ -67,7 +71,7 @@ module.exports = {
           if (options.width > 0 && options.height > 0) {
             ffmpegArgs.splice(4, 1, 'thumbnail,scale=' + options.width + ':' + options.height);
           }
-          child_process.execFile('ffmpeg', ffmpegArgs, function (error) {
+          child_process.execFile('ffmpeg', ffmpegArgs, execFileOptions, function (error) {
             if (error) reject(error);
             resolve({thumbnail: output});
           });
@@ -93,7 +97,7 @@ module.exports = {
             convertArgs.splice(0, 0, '-background', options.background);
             convertArgs.splice(0, 0, '-flatten');
           }
-          child_process.execFile('convert', convertArgs, function (error) {
+          child_process.execFile('convert', convertArgs, execFileOptions, function (error) {
             if (error) reject(error);
             resolve({thumbnail: output});
           });
@@ -103,7 +107,7 @@ module.exports = {
 
           let tempPDF = path.join(options.pdf_path, fileNameOrignal + '.pdf');
 
-          child_process.execFile('unoconv', ['-e', 'PageRange=1', '-o', tempPDF, input], function (error) {
+          child_process.execFile('unoconv', ['-e', 'PageRange=1', '-o', tempPDF, input], execFileOptions, function (error) {
             if (error) reject(error);
             let convertOtherArgs = [tempPDF + '[0]', output];
             if (options.width > 0 && options.height > 0) {
@@ -124,7 +128,7 @@ module.exports = {
               convertOtherArgs.splice(0, 0, '-background', options.background);
               convertOtherArgs.splice(0, 0, '-flatten');
             }
-            child_process.execFile('convert', convertOtherArgs, function (error) {
+            child_process.execFile('convert', convertOtherArgs, execFileOptions, function (error) {
               if (error) reject(error);
               if (!options.pdf || options.pdf == undefined) {
                 fs.unlink(tempPDF, function (error) {
@@ -254,7 +258,7 @@ module.exports = {
           convertOtherArgs.splice(0, 0, '-flatten');
         }
         child_process.execFileSync('convert', convertOtherArgs);
-        
+
         if (!options.pdf || options.pdf == undefined) {
           try {
             fs.unlinkSync(tempPDF);
@@ -269,5 +273,5 @@ module.exports = {
       }
     }
   })
-  
+
 };
